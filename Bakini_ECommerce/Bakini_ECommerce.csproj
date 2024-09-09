@@ -6,4 +6,20 @@
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Compile Remove="Admin\Model\**" />
+    <Content Remove="Admin\Model\**" />
+    <EmbeddedResource Remove="Admin\Model\**" />
+    <None Remove="Admin\Model\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Admin\Models\" />
+    <Folder Include="Admin\Cotrollers\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="Admin\Views\User\Index.cshtml" />
+  </ItemGroup>
+
 </Project>
