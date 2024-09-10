@@ -24,6 +24,7 @@
             subtotal = item.Quantity * item.Price;
             total += subtotal;
             <tr>
+                <input type="hidden" asp-for="@item.OrderCode" class="getId" />
                 <th scope="row">@item.Id</th>
                 <td>@item.OrderCode</td>
                 <td>@item.UserName</td>
@@ -42,18 +43,41 @@
         <tr>
             <td colspan="8">
                 <select class="form-control select-update-order">
-                    <option value="1">Approve</option>
-                    <option value="0">Cancel</option>
+                    <option value="" selected disabled>--Select status--</option>
+                    <option value="0">Not Process</option>
+                    <option value="1">Processed</option>
                 </select>
             </td>
         </tr>
     </tbody>
 </table>
-@* @section Scripts
+@section Scripts
 {
     <script>
-        $(document).ready(function () { 
-            $('.select-update-order')
-        })
+        $(document).ready(function () {
+            $('.select-update-order').change(function () {
+                var status = $(this).val();
+                var ordercode = $('.getId').val();
+                alert(status);
+                alert(ordercode);
+                $.ajax({
+                    type: "POST",
+                    url: "@Url.Action("UpdateOrder")",
+                    data: { status: status, ordercode: ordercode },
+
+                    success: function (result) {
+                        if (result.success) {
+                            console.log("Update successed");
+                        }
+                        else {
+                            console.log("Update failed: " + result.message);
+                        }
+                    },
+                    error: function (req, status, error) {
+                        console.error("Update error: ", error);
+                    }
+                });
+            });
+        });
     </script>
-} *@
+}
