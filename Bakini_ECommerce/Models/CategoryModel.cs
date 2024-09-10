@@ -10,8 +10,8 @@ namespace WebBanHang0.Models
         [Required]
         public string Name { get; set; }
 
-        [Required]
-        public string Description { get; set; }
+		[Required]
+		public string Description { get; set; }
 
         public string Slug { get; set; }
 
@@ -19,4 +19,3 @@ namespace WebBanHang0.Models
 
     }
 }
-
