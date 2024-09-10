@@ -1,4 +1,4 @@
-namespace Bakini_ECommerce.Models
+namespace WebBanHang0.Models
 {
     public class ErrorViewModel
     {
