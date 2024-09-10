@@ -25,17 +25,18 @@
                 <td>
                     @if (item.Status == 1)
                     {
-                        <span class="text text-success">Processing</span>
+                        <span class="text text-success">Processced</span>
                     }
                     else
                     {
-                        <span class="text text-danger">Processed</span>
+                        <span class="text text-danger">Not Process</span>
                     }
                 </td>
 
                 <td>
                     <a asp-action="ViewOrder" asp-controller="Order" asp-route-ordercode="@item.OrderCode" class="btn btn-default">View</a>
-                    <a asp-action="Delete" asp-controller="Order" asp-route-Id="@item.Id" class="btn btn-default confirmDeletion">Delete</a>
+                    @*                     <a asp-action="DeleteOrder" asp-controller="Order" asp-route-Id="@item.OrderCode" class="btn btn-default confirmDeletion">Delete</a>
+                *@
                 </td>
 
             </tr>
