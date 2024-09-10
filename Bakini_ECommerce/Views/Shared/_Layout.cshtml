@@ -1,11 +1,67 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
 <head>
-    <p>hi</p>
     <style>
-        .center {
+        .center
+        {
             margin: auto;
         }
+
+        .search_box {
+            display: flex;
+            align-items: center;
+            max-width: 600px; /* Đặt độ rộng tối đa bạn muốn */
+            margin: 0 auto; /* Căn giữa */
+        }
+
+            .search_box input[type="text"] {
+                flex: 1; /* Kéo dài để chiếm toàn bộ không gian còn lại */
+                padding: 10px;
+                border: 1px solid #ccc;
+                border-radius: 4px 0 0 4px; /* Bo góc chỉ ở bên trái */
+                font-size: 16px;
+            }
+
+            .search_box button {
+                padding: 10px 15px;
+                border: 1px solid #ccc;
+                border-radius: 0 4px 4px 0; /* Bo góc chỉ ở bên phải */
+                background-color: #f0ad4e; /* Màu nền của nút */
+                color: #fff;
+                font-size: 16px;
+                cursor: pointer;
+            }
+
+                .search_box button:hover {
+                    background-color: #ec971f; /* Màu nền khi hover */
+                }
+
+        .shop-menu {
+            display: flex;
+            justify-content: center; /* Căn giữa theo chiều ngang */
+            padding: 0;
+        }
+
+            .shop-menu ul {
+                list-style: none; /* Xóa dấu chấm cho danh sách */
+                padding: 0;
+                margin: 0;
+            }
+
+                .shop-menu ul li {
+                    display: inline; /* Hiển thị các mục danh sách theo hàng ngang */
+                    margin: 0 10px; /* Khoảng cách giữa các mục */
+                }
+
+                    .shop-menu ul li a {
+                        text-decoration: none; /* Xóa gạch chân */
+                        color: #000; /* Màu chữ của liên kết */
+                    }
+
+                        .shop-menu ul li a:hover {
+                            color: #f0ad4e; /* Màu chữ khi hover */
+                        }
+
     </style>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -33,33 +89,10 @@
 <body>
     <header id="header">
         <!--header-->
-        @* 		<div class="header_top">
+        <div class="header_top">
         <!--header_top-->
-        <div class="container">
-        <div class="row">
-        <div class="col-sm-6">
-        <div class="contactinfo">
-        <ul class="nav nav-pills">
-        <li><a href="#"><i class="fa fa-phone"></i> +2 95 01 88 821</a></li>
-        <li><a href="#"><i class="fa fa-envelope"></i> info@domain.com</a></li>
-        </ul>
-        </div>
-        </div>
-        <div class="col-sm-6">
-        <div class="social-icons pull-right">
-        <ul class="nav navbar-nav">
-        <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-        <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-        <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
-        <li><a href="#"><i class="fa fa-dribbble"></i></a></li>
-        <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
-        </ul>
-        </div>
-        </div>
-        </div>
-        </div>
         </div><!--/header_top-->
-        *@
+
         <div class="header-middle">
             <!--header-middle-->
             <div class="container">
@@ -92,27 +125,18 @@
                     </div>
                     </div>
                     </div>
-                    *@
-                    <div class="col-sm-12">
-                        <div class="shop-menu text-center">
-                            <ul class="nav navbar-nav d-inline-block">
+                    *@					<div class="col-sm-12">
+                        <div class="shop-menu pull-right">
+                            <ul class="nav navbar-nav">
                                 @if (User.Identity?.IsAuthenticated ?? false)
                                 {
                                     <li><a href="#"><i class="fa fa-user"></i> Hi, @User.Identity.Name</a></li>
-                                    <li><a asp-controller="Home"><i class="fa fa-home"></i> Home</a></li>
-                                    <li><a asp-controller="Home"><i class="fa fa-tags"></i> Shop</a></li>
-                                    <li><a href="#"><i class="fa fa-star"></i> Wishlist</a></li>
-                                    <li><a href="checkout.html"><i class="fa fa-crosshairs"></i> Checkout</a></li>
+                                    <li><a asp-controller="Home" asp-action="Index"><i class="fa fa-home"></i> Home</a></li>
+@*                                     <li><a asp-controller="Home"><i class="fa fa-tags"></i> Shop</a></li>
+ *@                                    @* <li><a href="#"><i class="fa fa-star"></i> Wishlist</a></li>
+                                <li><a href="checkout.html"><i class="fa fa-crosshairs"></i> Checkout</a></li> *@
                                     <li><a asp-controller="Cart"><i class="fa fa-shopping-cart"></i> Cart</a></li>
                                     <li><a asp-controller="Account" asp-action="Logout"><i class="fa fa-lock"></i> Logout</a></li>
-                                    @if (User.IsInRole("Admin"))
-                                    {
-                                        <li><a asp-area="Admin" asp-controller="Product" asp-action="Index"><i class="fa fa-lock"></i> Admin Manage</a></li>
-                                    }
-                                    @if (User.IsInRole("Seller"))
-                                    {
-                                        <li><a asp-area="Admin" asp-controller="Product" asp-action="Index"><i class="fa fa-lock"></i> Seller Manage</a></li>
-                                    }
                                 }
                                 else
                                 {
@@ -124,18 +148,62 @@
                             </ul>
                         </div>
                     </div>
+
                 </div>
             </div>
         </div><!--/header-middle-->
+<<<<<<< Updated upstream
 
-        <div class="text-center">
-            <form asp-controller="Product" asp-action="Search" method="post" class="d-inline-block">
-                <div class="search_box">
-                    <input type="text" placeholder="Search" name="searchTerm" />
-                    <button class="btn btn-warning" type="submit"><i class="fa fa-search"></i></button>
+=======
+>>>>>>> Stashed changes
+        <div class="header-bottom">
+            <!--header-bottom-->
+            <div class="container">
+                <div class="row">
+<<<<<<< Updated upstream
+                    <div class="col-sm-9">
+                        <div class="navbar-header">
+                            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                                <span class="sr-only">Toggle navigation</span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                            </button>
+                        </div>
+                        <div class="mainmenu pull-left">
+                            <ul class="nav navbar-nav collapse navbar-collapse">
+                                <li><a asp-controller="Home">Home</a></li>
+                                <li class="dropdown">
+                                    <a asp-controller="Product">Shop<i class="fa fa-angle-down"></i></a>
+                                    <ul role="menu" class="sub-menu">
+                                        <li><a asp-controller="Category">Category</a></li>
+                                        <li><a asp-controller="Product" asp-action="Details">Details</a></li>
+                                        <li><a asp-controller="Checkout">Checkout</a></li>
+                                        <li><a asp-controller="Cart">Cart</a></li>
+                                        <li><a asp-controller="Login">Login</a></li>
+                                    </ul>
+                                </li>
+                                @* 								<li class="dropdown">
+                                <a href="#">Blog<i class="fa fa-angle-down"></i></a>
+                                <ul role="menu" class="sub-menu">
+                                <li><a href="blog.html">Blog List</a></li>
+                                <li><a href="blog-single.html">Blog Single</a></li>
+                                </ul>
+                                </li>
+                                <li><a href="404.html">404</a></li>
+                                <li><a href="contact-us.html">Contact</a></li>
+                                *@
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="search_box pull-right">
+                            <input type="text" placeholder="Search" />
+                        </div>
+                    </div>
                 </div>
-            </form>
-        </div>
+            </div>
+        </div><!--/header-bottom-->
     </header><!--/header-->
 
     <section id="slider">
@@ -162,47 +230,88 @@
                                     <img src="images/home/girl1.jpg" class="girl img-responsive" alt="" />
                                     <img src="images/home/pricing.png" class="pricing" alt="" />
                                 </div>
+=======
+                    <div class="text-center">
+                        <form asp-controller="Product" asp-action="Search" method="post" class="d-inline-block">
+                            <div class="search_box">
+                                <input type="text" placeholder="Search" name="searchTerm" />
+                                <button class="btn btn-warning" type="submit"><i class="fa fa-search"></i></button>
+>>>>>>> Stashed changes
                             </div>
-                            <div class="item">
-                                <div class="col-sm-6">
-                                    <h1><span>E</span>-SHOPPER</h1>
-                                    <h2>100% Responsive Design</h2>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
-                                    <button type="button" class="btn btn-default get">Get it now</button>
-                                </div>
-                                <div class="col-sm-6">
-                                    <img src="images/home/girl2.jpg" class="girl img-responsive" alt="" />
-                                    <img src="images/home/pricing.png" class="pricing" alt="" />
-                                </div>
-                            </div>
-
-                            <div class="item">
-                                <div class="col-sm-6">
-                                    <h1><span>E</span>-SHOPPER</h1>
-                                    <h2>Free Ecommerce Template</h2>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
-                                    <button type="button" class="btn btn-default get">Get it now</button>
-                                </div>
-                                <div class="col-sm-6">
-                                    <img src="images/home/girl3.jpg" class="girl img-responsive" alt="" />
-                                    <img src="images/home/pricing.png" class="pricing" alt="" />
-                                </div>
-                            </div>
-
-                        </div>
-
-                        <a href="#slider-carousel" class="left control-carousel hidden-xs" data-slide="prev">
-                            <i class="fa fa-angle-left"></i>
-                        </a>
-                        <a href="#slider-carousel" class="right control-carousel hidden-xs" data-slide="next">
-                            <i class="fa fa-angle-right"></i>
-                        </a>
+                        </form>
                     </div>
-
                 </div>
             </div>
-        </div>
-    </section><!--/slider-->
+        </div><!--/header-bottom-->
+
+
+    </header><!--/header-->
+
+    @* <section id="slider">
+    <!--slider-->
+    <div class="container">
+    <div class="row">
+    <div class="col-sm-12">
+    <div id="slider-carousel" class="carousel slide" data-ride="carousel">
+    <ol class="carousel-indicators">
+    <li data-target="#slider-carousel" data-slide-to="0" class="active"></li>
+    <li data-target="#slider-carousel" data-slide-to="1"></li>
+    <li data-target="#slider-carousel" data-slide-to="2"></li>
+    </ol>
+
+    <div class="carousel-inner">
+    <div class="item active">
+    <div class="col-sm-6">
+    <h1><span>E</span>-SHOPPER</h1>
+    <h2>Free E-Commerce Template</h2>
+    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
+    <button type="button" class="btn btn-default get">Get it now</button>
+    </div>
+    <div class="col-sm-6">
+    <img src="images/home/girl1.jpg" class="girl img-responsive" alt="" />
+    <img src="images/home/pricing.png" class="pricing" alt="" />
+    </div>
+    </div>
+    <div class="item">
+    <div class="col-sm-6">
+    <h1><span>E</span>-SHOPPER</h1>
+    <h2>100% Responsive Design</h2>
+    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
+    <button type="button" class="btn btn-default get">Get it now</button>
+    </div>
+    <div class="col-sm-6">
+    <img src="images/home/girl2.jpg" class="girl img-responsive" alt="" />
+    <img src="images/home/pricing.png" class="pricing" alt="" />
+    </div>
+    </div>
+
+    <div class="item">
+    <div class="col-sm-6">
+    <h1><span>E</span>-SHOPPER</h1>
+    <h2>Free Ecommerce Template</h2>
+    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
+    <button type="button" class="btn btn-default get">Get it now</button>
+    </div>
+    <div class="col-sm-6">
+    <img src="images/home/girl3.jpg" class="girl img-responsive" alt="" />
+    <img src="images/home/pricing.png" class="pricing" alt="" />
+    </div>
+    </div>
+
+    </div>
+
+    <a href="#slider-carousel" class="left control-carousel hidden-xs" data-slide="prev">
+    <i class="fa fa-angle-left"></i>
+    </a>
+    <a href="#slider-carousel" class="right control-carousel hidden-xs" data-slide="next">
+    <i class="fa fa-angle-right"></i>
+    </a>
+    </div>
+
+    </div>
+    </div>
+    </div>
+    </section><!--/slider--> *@
 
     <section>
         <div class="container">
