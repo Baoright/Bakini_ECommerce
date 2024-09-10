@@ -103,11 +103,11 @@ namespace WebBanHang0.Controllers
             }
             return RedirectToAction("Index");
         }
-        public async Task<IActionResult> Clear()
+		public async Task<IActionResult> Clear()
         {
-            HttpContext.Session.Remove("Cart");
-            return RedirectToAction("Index");
-        }
+			HttpContext.Session.Remove("Cart");
+			return RedirectToAction("Index");
+		}
 
-    }
+	}
 }
